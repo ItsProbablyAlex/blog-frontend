@@ -5,15 +5,14 @@ import Layout from '../../components/_templates/main';
 
 const components = {};
 
-const Post = ({metadata, content}) => (
+const Post = ({content}) => (
   <>
-    <h1>{metadata.title}</h1>
     <MDXRemote {...content} components={components} />
   </>
 );
 
 Post.getLayout = (page) => (
-  <Layout>{page}</Layout>
+  <Layout pageTitle={page.props.metadata.title}>{page}</Layout>
 );
 
 export async function getStaticPaths() {
