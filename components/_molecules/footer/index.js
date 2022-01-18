@@ -1,5 +1,11 @@
+import styled from "styled-components";
+
+const Footer = styled.footer`
+  text-align: center;
+`;
+
 export default () => (
-  <footer>
+  <Footer>
     <p>© Alex Chapman</p>
-  </footer>
+  </Footer>
 );
