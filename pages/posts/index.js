@@ -1,6 +1,7 @@
-import Link from 'next/link';
 import Layout from '../../components/_templates/main';
 import { getPostOverviews } from '../../lib/posts';
+import Link from '../../components/_atoms/link';
+import styled from 'styled-components';
 
 // Helper to make GET requests to Strapi
 export async function fetchAPI() {
@@ -10,13 +11,21 @@ export async function fetchAPI() {
   return data;
 }
 
+const PostCard = styled.div`
+  a {
+    text-decoration: underline;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+`;
+
 const buildPostCard = (p) => (
-  <>
-    <Link href={`/posts/${p.id}`}>
-      <a>{p.attributes.title}</a>
-    </Link>
-    <p>{p.attributes.pretext}</p>
-  </>
+  <PostCard>
+      <Link path={`/posts/${p.id}`}>
+        {p.attributes.title}
+      </Link>
+      <p>{p.attributes.pretext}</p>
+  </PostCard>
 );
 
 const HomePage = (props) => (

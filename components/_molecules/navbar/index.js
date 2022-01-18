@@ -1,4 +1,20 @@
 import styled from "styled-components";
+import Link from "../../_atoms/link";
+
+const NAV_LINKS = [
+    {
+        path: '/about',
+        text: 'About Me'
+    },
+    {
+        path: '/posts',
+        text: 'Blog'
+    },
+    {
+        path: '/contact',
+        text: 'Contact'
+    }
+];
 
 const NavHeader = styled.div``;
 
@@ -17,17 +33,16 @@ const NavOptions = styled.nav`
   text-decoration: none;
 `;
 
-const NavLinks = styled.h1`
+const NavLinks = styled.ul`
+  padding: 0;
+  list-style: none;
 `;
 
-const NavLink = styled.h1`
-  color: ${({theme}) => theme.colors.link};
-  font-size: 1rem;
-  font-weight: 400;
-  margin: 0.3rem 0;
-`;
-
-
+const buildLink = ({path, text}) => (
+    <li>
+        <Link path={path}>{text}</Link>
+    </li>
+)
 export default () => (
   <>
     <NavHeader>
@@ -36,9 +51,7 @@ export default () => (
     </NavHeader>
     <NavOptions>
       <NavLinks>
-        <NavLink>About Me</NavLink>
-        <NavLink>Blog</NavLink>
-        <NavLink>Contact</NavLink>
+        {NAV_LINKS.map(l => buildLink(l))}
       </NavLinks>
     </NavOptions>
   </>

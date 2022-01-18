@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 
 const theme = {
@@ -14,11 +14,12 @@ const GlobalStyle = createGlobalStyle`
   html {
     font-family: 'Ubuntu Mono', monospace;
     background-color: ${theme.colors.background};
+    color: ${theme.colors.subHeader};
   }
 `;
 
 function MyApp({ Component, pageProps }) {
-  const getLayout = Component.getLayout || ((page) => page)
+  const getLayout = Component.getLayout || ((page) => page);
   return (
     <>
       <Head>
