@@ -1,9 +1,6 @@
-import Link from 'next/link'
-
-import { gql } from "@apollo/client";
-import client from "../../lib/apollo";
-
-import Layout from '../../components/_templates/main'
+import Link from 'next/link';
+import Layout from '../../components/_templates/main';
+import { getPostOverviews } from '../../lib/posts';
 
 // Helper to make GET requests to Strapi
 export async function fetchAPI() {
@@ -13,43 +10,32 @@ export async function fetchAPI() {
   return data;
 }
 
-const getLink = (p) => (
-  <Link href={`/posts/${p.id}`}>
-    <a>{p.attributes.title}</a>
-  </Link>
+const buildPostCard = (p) => (
+  <>
+    <Link href={`/posts/${p.id}`}>
+      <a>{p.attributes.title}</a>
+    </Link>
+    <p>{p.attributes.pretext}</p>
+  </>
 );
 
 const HomePage = (props) => (
   <>
   {
-    props.posts.map(p => getLink(p))
+    props.posts.map(p => buildPostCard(p))
   }
   </>
 );
 
 HomePage.getLayout = (page) => (
-  <Layout>{page}</Layout>
+  <Layout pageTitle="Things I've Written">{page}</Layout>
 );
 
 export const getStaticProps = async () => {
-  const { data } = await client.query({
-    query: gql`
-      query Posts {
-        posts {
-          data {
-            id
-            attributes {
-              title,
-              slug
-            }
-          }
-        }
-      }
-    `,
-  });
+  const posts = await getPostOverviews();
   return {
     props: {
-      posts: data.posts.data
+      posts
     }
   };
 }

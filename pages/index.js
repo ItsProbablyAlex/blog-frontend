@@ -1,7 +1,5 @@
-import { gql } from "@apollo/client";
-import client from "../lib/apollo";
-
-import Layout from '../components/_templates/main'
+import Layout from '../components/_templates/main';
+import { getPostOverviews } from '../lib/posts';
 
 // Helper to make GET requests to Strapi
 export async function fetchAPI() {
@@ -12,7 +10,7 @@ export async function fetchAPI() {
 }
 
 const HomePage = (props) => (
-  <p>Hi {props.posts.map(p => p.attributes.title)}</p>
+  <p>{props.posts.map(p => p.attributes.title)}</p>
 );
 
 HomePage.getLayout = (page) => (
@@ -20,23 +18,10 @@ HomePage.getLayout = (page) => (
 );
 
 export const getStaticProps = async () => {
-  const { data } = await client.query({
-    query: gql`
-      query Posts {
-        posts {
-          data {
-            attributes {
-              title,
-              slug
-            }
-          }
-        }
-      }
-    `,
-  });
+  const posts = await getPostOverviews();
   return {
     props: {
-      posts: data.posts.data
+      posts
     }
   };
 }

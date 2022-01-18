@@ -1,13 +1,14 @@
-import { gql } from "@apollo/client";
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote } from 'next-mdx-remote';
+import {getPostContent, getPostIds} from '../../lib/posts';
+import Layout from '../../components/_templates/main';
 
-import {getPostIds} from '../../lib/posts';
-import client from "../../lib/apollo";
-import Layout from '../../components/_templates/main'
+const components = {};
 
-const Post = ({post}) => (
+const Post = ({metadata, content}) => (
   <>
-    <h1>{post.attributes.title}</h1>
-    <p>{post.attributes.postcontent}</p>
+    <h1>{metadata.title}</h1>
+    <MDXRemote {...content} components={components} />
   </>
 );
 
@@ -25,26 +26,14 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async (context) => {
-  const { data } = await client.query({
-    query: gql`
-      query Posts {
-        post(id: ${context.params.slug}) {
-          data {
-            attributes {
-              title,
-              slug,
-              postcontent
-            }
-          }
-        }
-      }
-    `,
-  });
+  const post = await getPostContent(context.params.slug);
+  const parsed = await serialize(post.attributes.content);
   return {
     props: {
-      post: data.post.data
+      metadata: post.attributes,
+      content: parsed
     }
-  };
+  }
 }
 
 
