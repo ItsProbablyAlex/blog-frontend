@@ -12,7 +12,7 @@ const PostCard = styled.div`
 `;
 
 const buildPostCard = (p) => (
-  <PostCard>
+  <PostCard key={p.attributes.slug}>
       <Link path={`/posts/${p.id}`}>
         {p.attributes.title}
       </Link>

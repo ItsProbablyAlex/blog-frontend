@@ -17,7 +17,6 @@ SinglePage.getLayout = (page) => (
 
 export async function getStaticPaths() {
   const singlePagePaths = await getSinglePagePaths();
-  console.log(singlePagePaths);
   const paths = singlePagePaths.map(page => `/${page.attributes.slug}`);
   return {
     paths,

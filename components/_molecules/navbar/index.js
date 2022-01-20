@@ -39,7 +39,7 @@ const NavLinks = styled.ul`
 `;
 
 const buildLink = ({path, text}) => (
-    <li>
+    <li key={text.replace(/\s/,'-')}>
         <Link path={path}>{text}</Link>
     </li>
 )
