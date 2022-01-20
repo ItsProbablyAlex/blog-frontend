@@ -1,7 +1,7 @@
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import Layout from '../components/_templates/main';
-import { getSinglePage } from '../lib/statics';
+import { getContact } from '../lib/statics';
 
 const components = {};
 
@@ -17,7 +17,7 @@ Contact.getLayout = (page) => (
 );
 
 export const getStaticProps = async (context) => {
-  const contact = await getSinglePage('contact');
+  const contact = await getContact('contact');
   const parsed = await serialize(contact.attributes.content);
   return {
     props: {
