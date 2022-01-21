@@ -16,6 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/client": "^3.5.7",
+    "@babel/core": "^7.16.10",
+    "babel-plugin-styled-components": "^2.0.2",
     "graphql": "^16.2.0",
     "next": "^12.0.8",
     "next-mdx-remote": "^3.0.8",
@@ -23,7 +25,5 @@
     "react-dom": "^17.0.2",
     "styled-components": "^5.3.3"
   },
-  "devDependencies": {
-    "babel-plugin-styled-components": "^2.0.2"
-  }
+  "devDependencies": {}
 }
