@@ -13,7 +13,7 @@ const Contact = ({content}) => (
 );
 
 Contact.getLayout = (page) => (
-  <Layout pageTitle={page.props.metadata.title}>{page}</Layout>
+  <Layout pageTitle={page.props.metadata.title} navLinks={page.props.navLinks}>{page}</Layout>
 );
 
 export const getStaticProps = async (context) => {

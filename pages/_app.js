@@ -1,5 +1,18 @@
+import App from 'next/app';
 import Head from 'next/head';
 import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { getNavbarContent } from '../lib/nav';
+
+const STATIC_LINKS = [
+  {
+      path: '/posts',
+      text: 'Blog'
+  },
+  {
+      path: '/contact',
+      text: 'Contact'
+  }
+];
 
 const theme = {
   colors: {
@@ -18,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, navLinks }) {
   const getLayout = Component.getLayout || ((page) => page);
   return (
     <>
@@ -29,10 +42,29 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        {getLayout(<Component {...pageProps} />)}
+        {getLayout(<Component {...pageProps} navLinks={navLinks} />)}
       </ThemeProvider>
     </>
   );
+}
+
+const getNavLinks = async () => {
+  return getNavbarContent().then(content => {
+    const remoteLinks = content.map(c => ({
+      path: `/${c.attributes.slug}`,
+      text: c.attributes.title,
+    }));
+    return [...STATIC_LINKS, ...remoteLinks];
+  });
+};
+
+MyApp.getInitialProps = async (appContext) => {
+  return Promise.all([
+    App.getInitialProps(appContext),
+    getNavLinks()
+  ]).then(values => {
+    return {...values[0], navLinks: values[1]}
+  })
 }
 
 export default MyApp;

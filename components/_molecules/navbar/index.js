@@ -1,21 +1,6 @@
 import styled from "styled-components";
 import Link from "../../_atoms/link";
 
-const NAV_LINKS = [
-    {
-        path: '/about',
-        text: 'About Me'
-    },
-    {
-        path: '/posts',
-        text: 'Blog'
-    },
-    {
-        path: '/contact',
-        text: 'Contact'
-    }
-];
-
 const NavHeader = styled.div``;
 
 const NavTitle = styled.h1`
@@ -38,12 +23,13 @@ const NavLinks = styled.ul`
   list-style: none;
 `;
 
-const buildLink = ({path, text}) => (
-    <li key={text.replace(/\s/,'-')}>
-        <Link path={path}>{text}</Link>
+const buildLink = (p) => (
+    <li key={p.text.replace(/\s/,'-')}>
+        <Link path={p.path}>{p.text}</Link>
     </li>
-)
-export default () => (
+);
+
+export default (props) => (
   <>
     <NavHeader>
       <NavTitle>Alex Chapman</NavTitle>
@@ -51,7 +37,7 @@ export default () => (
     </NavHeader>
     <NavOptions>
       <NavLinks>
-        {NAV_LINKS.map(l => buildLink(l))}
+        {props.navLinks.map(l => buildLink(l))}
       </NavLinks>
     </NavOptions>
   </>

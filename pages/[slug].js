@@ -2,8 +2,9 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import {getContentPage, getSinglePagePaths} from '../lib/statics';
 import Layout from '../components/_templates/main';
+import ContactCard from '../components/_molecules/ContactCard';
 
-const components = {};
+const components = {ContactCard};
 
 const SinglePage = ({content}) => (
   <>
@@ -12,7 +13,7 @@ const SinglePage = ({content}) => (
 );
 
 SinglePage.getLayout = (page) => (
-  <Layout pageTitle={page.props.metadata.title}>{page}</Layout>
+  <Layout pageTitle={page.props.metadata.title} navLinks={page.props.navLinks}>{page}</Layout>
 );
 
 export async function getStaticPaths() {

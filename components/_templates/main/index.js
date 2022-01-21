@@ -8,11 +8,11 @@ const Main = styled.div`
   margin: 0 auto;
 `;
 
-export default ({pageTitle, children}) => (
+export default (props) => (
   <Main>
-    <Navbar />
-    <PageTitle>{pageTitle}</PageTitle> 
-    <main>{children}</main>
+    <Navbar navLinks={props.navLinks}/>
+    <PageTitle>{props.pageTitle}</PageTitle> 
+    <main>{props.children}</main>
     <Footer />
   </Main>
 )
