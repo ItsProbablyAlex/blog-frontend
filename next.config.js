@@ -3,8 +3,4 @@ module.exports = {
     experimental: {
         styledComponents: true,
     },
-    i18n: {
-        locales: ["en"],
-        defaultLocale: "en",
-    },
 };
