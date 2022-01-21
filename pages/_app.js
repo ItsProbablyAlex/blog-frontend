@@ -3,13 +3,6 @@ import Head from 'next/head';
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { getNavbarContent } from '../lib/nav';
 
-const STATIC_LINKS = [
-  {
-      path: '/posts',
-      text: 'Blog'
-  }
-];
-
 const theme = {
   colors: {
     background: "#e9e7dc",
@@ -44,13 +37,23 @@ function MyApp({ Component, pageProps, navLinks }) {
   );
 }
 
+const STATIC_LINKS = [
+  {
+      path: '/posts',
+      text: 'Blog',
+      order: 1
+  }
+];
+
 const getNavLinks = async () => {
   return getNavbarContent().then(content => {
-    return content.map(c => ({
+    const remoteLinks = content.map(c => ({
       path: `/${c.attributes.slug}`,
       text: c.attributes.title,
+      order: c.attributes.navbarOrder
     }));
-    return [...STATIC_LINKS, ...remoteLinks];
+    const sorted = [...STATIC_LINKS, ...remoteLinks].sort((a, b) => a.order - b.order)
+    return sorted;
   });
 };
 
