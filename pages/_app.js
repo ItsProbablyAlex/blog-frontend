@@ -7,10 +7,6 @@ const STATIC_LINKS = [
   {
       path: '/posts',
       text: 'Blog'
-  },
-  {
-      path: '/contact',
-      text: 'Contact'
   }
 ];
 
@@ -50,7 +46,7 @@ function MyApp({ Component, pageProps, navLinks }) {
 
 const getNavLinks = async () => {
   return getNavbarContent().then(content => {
-    const remoteLinks = content.map(c => ({
+    return content.map(c => ({
       path: `/${c.attributes.slug}`,
       text: c.attributes.title,
     }));
