@@ -3,7 +3,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 module.exports = withBundleAnalyzer({
-    assetPrefix: './',
     swcMinify: true,
     experimental: {
         styledComponents: true,
