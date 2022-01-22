@@ -10,6 +10,15 @@ const Icon = styled.i`
   margin-right: 1rem;
 `;
 
+const Anchor = styled.a`
+    text-decoration: none;
+    font-weight: 400;
+    color: ${({theme}) => theme.colors.link};
+    :hover{
+        color: ${({theme}) => theme.colors.subHeader};
+    }
+`;
+
 export default ({icon, uri, title}) => (
   <>
       <Head>
@@ -17,7 +26,7 @@ export default ({icon, uri, title}) => (
       </Head>
       <ListItem>
         <Icon className={icon}></Icon>
-        <a href={uri}>{title}</a>
+        <Anchor href={uri}>{title}</Anchor>
       </ListItem>
   </>
 );
