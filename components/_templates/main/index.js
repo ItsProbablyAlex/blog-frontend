@@ -1,7 +1,9 @@
+import dynamic from "next/dynamic";
 import styled from "styled-components";
-import Navbar from "../../_molecules/navbar";
 import PageTitle from "../../_atoms/pagetitle";
 import Footer from "../../_molecules/footer";
+
+const Navbar = dynamic(() => import('../../_molecules/navbar'));
 
 const Main = styled.div`
   width: 80%;
