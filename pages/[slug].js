@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import { serialize } from 'next-mdx-remote/serialize';
-import {getContentPage, getSinglePagePaths} from '../lib/statics';
 import Layout from '../components/_templates/main';
 
 const DynamicMDX = dynamic(() => import('../components/_molecules/markdown'));
