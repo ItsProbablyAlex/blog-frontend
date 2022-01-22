@@ -1,7 +1,7 @@
 import App from 'next/app';
 import Head from 'next/head';
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-import { getNavbarContent } from '../lib/nav';
+
 
 const theme = {
   colors: {
