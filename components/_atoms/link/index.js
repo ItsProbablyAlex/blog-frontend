@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Link from 'next/link';
+import BaseLink from "../baselink";
 
 const InnerLink = styled.a`
     text-decoration: none;
@@ -13,6 +14,6 @@ const InnerLink = styled.a`
 
 export default ({children, path}) => (
     <Link href={path} passHref>
-        <InnerLink>{children}</InnerLink>
+        <BaseLink>{children}</BaseLink>
     </Link>
 );
