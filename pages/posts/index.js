@@ -1,7 +1,6 @@
-import Layout from '../../components/_templates/main';
-import { getPostOverviews } from '../../lib/posts';
-import Link from '../../components/_atoms/link';
 import styled from 'styled-components';
+import Layout from '../../components/_templates/main';
+import Link from '../../components/_atoms/link';
 
 const PostCard = styled.div`
   a {
@@ -33,12 +32,13 @@ HomePage.getLayout = (page) => (
 );
 
 export const getStaticProps = async () => {
-  const posts = await getPostOverviews();
-  return {
-    props: {
-      posts
-    }
-  };
+  return import('../../lib/posts')
+    .then(({getPostOverviews}) => getPostOverviews())
+    .then(posts => ({
+      props: {
+        posts
+      }
+    }));
 }
 
 export default HomePage;

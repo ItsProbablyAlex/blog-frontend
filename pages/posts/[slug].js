@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import { serialize } from 'next-mdx-remote/serialize';
-import {getPostContent, getPostIds} from '../../lib/posts';
 import Layout from '../../components/_templates/main';
 
 const DynamicMDX = dynamic(() => import('../../components/_molecules/markdown'));
@@ -12,23 +11,28 @@ Post.getLayout = (page) => (
 );
 
 export async function getStaticPaths() {
-  const postIds = await getPostIds();
-  const paths = postIds.map(id => `/posts/${id}`);
-  return {
-    paths,
-    fallback: false,
-  };
+  return import('../../lib/posts')
+    .then(({getPostIds}) => getPostIds()) 
+    .then(postIds => {
+      const paths = postIds.map(id => `/posts/${id}`)
+      return {
+        paths,
+        fallback: false,
+      }
+    });
 }
 
 export const getStaticProps = async (context) => {
-  const post = await getPostContent(context.params.slug);
-  const parsed = await serialize(post.attributes.content);
-  return {
-    props: {
-      metadata: post.attributes,
-      content: parsed
-    }
-  }
+  const post = import('../../lib/posts')
+    .then(({getPostContent}) => getPostContent(context.params.slug));
+  const parsed = post.then(p => serialize(p.attributes.content));
+  return Promise.all([post, parsed])
+    .then(([post, parsed]) => ({
+      props: {
+        metadata: post.attributes,
+        content: parsed
+      }
+    }));
 }
 
 

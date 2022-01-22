@@ -12,23 +12,28 @@ SinglePage.getLayout = (page) => (
 );
 
 export async function getStaticPaths() {
-  const singlePagePaths = await getSinglePagePaths();
-  const paths = singlePagePaths.map(page => `/${page.attributes.slug}`);
-  return {
-    paths,
-    fallback: false,
-  };
+  return import('../lib/statics')
+    .then(({getSinglePagePaths}) => getSinglePagePaths())
+    .then(singlePagePaths => {
+      const paths = singlePagePaths.map(page => `/${page.attributes.slug}`);
+      return {
+        paths,
+        fallback: false,
+      };
+    });
 }
 
 export const getStaticProps = async (context) => {
-    const page = await getContentPage(context.params.slug);
-    const parsed = await serialize(page.attributes.content);
-    return {
-        props: {
+  const page = import('../lib/statics')
+    .then(({getContentPage}) => getContentPage(context.params.slug));
+  const parsed = page.then(p => serialize(p.attributes.content));
+  return Promise.all([page, parsed])
+    .then(([page, parsed]) => ({
+      props: {
         metadata: page.attributes,
         content: parsed
-        }
-    }
+      }
+    }));
 }
 
 
