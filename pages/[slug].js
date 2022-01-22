@@ -2,9 +2,10 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import {getContentPage, getSinglePagePaths} from '../lib/statics';
 import Layout from '../components/_templates/main';
-import ContactCard from '../components/_molecules/ContactCard';
+import UndecoratedList from '../components/_atoms/undecoratedlist';
+import IconLink from '../components/_atoms/iconlink';
 
-const components = {ContactCard};
+const components = {UndecoratedList, IconLink};
 
 const SinglePage = ({content}) => (
   <>
