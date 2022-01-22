@@ -1,5 +1,5 @@
 
-import Head from 'next/head';
+import Script from 'next/script'
 import styled from 'styled-components';
 import BaseLink from '../baselink';
 
@@ -13,9 +13,7 @@ const Icon = styled.i`
 
 export default ({icon, uri, title}) => (
   <>
-      <Head>
-        <script src="https://kit.fontawesome.com/c7af329ccd.js" crossOrigin="anonymous"></script>
-      </Head>
+      <Script src="https://kit.fontawesome.com/c7af329ccd.js" crossOrigin="anonymous" />
       <ListItem>
         <Icon className={icon}></Icon>
         <BaseLink href={uri}>{title}</BaseLink>
