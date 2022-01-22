@@ -22,9 +22,9 @@ const buildPostCard = (p) => (
 
 const HomePage = (props) => (
   <>
-  {
-    props.posts.map(p => buildPostCard(p))
-  }
+    {
+      props.posts.map(p => buildPostCard(p))
+    }
   </>
 );
 

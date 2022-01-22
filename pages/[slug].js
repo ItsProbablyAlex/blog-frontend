@@ -1,17 +1,11 @@
+import dynamic from 'next/dynamic';
 import { serialize } from 'next-mdx-remote/serialize';
-import { MDXRemote } from 'next-mdx-remote';
 import {getContentPage, getSinglePagePaths} from '../lib/statics';
 import Layout from '../components/_templates/main';
-import UndecoratedList from '../components/_atoms/undecoratedlist';
-import IconLink from '../components/_atoms/iconlink';
 
-const components = {UndecoratedList, IconLink};
+const DynamicMDX = dynamic(() => import('../components/_molecules/markdown'));
 
-const SinglePage = ({content}) => (
-  <>
-    <MDXRemote {...content} components={components} />
-  </>
-);
+const SinglePage = ({content}) => <DynamicMDX content={content} />;
 
 SinglePage.getLayout = (page) => (
   <Layout pageTitle={page.props.metadata.title} navLinks={page.props.navLinks}>{page}</Layout>

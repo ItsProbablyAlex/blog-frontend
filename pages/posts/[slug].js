@@ -1,15 +1,11 @@
+import dynamic from 'next/dynamic';
 import { serialize } from 'next-mdx-remote/serialize';
-import { MDXRemote } from 'next-mdx-remote';
 import {getPostContent, getPostIds} from '../../lib/posts';
 import Layout from '../../components/_templates/main';
 
-const components = {};
+const DynamicMDX = dynamic(() => import('../../components/_molecules/markdown'));
 
-const Post = ({content}) => (
-  <>
-    <MDXRemote {...content} components={components} />
-  </>
-);
+const Post = ({content}) => <DynamicMDX content={content} />;
 
 Post.getLayout = (page) => (
   <Layout pageTitle={page.props.metadata.title} navLinks={page.props.navLinks}>{page}</Layout>
