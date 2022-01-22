@@ -46,15 +46,17 @@ const STATIC_LINKS = [
 ];
 
 const getNavLinks = async () => {
-  return getNavbarContent().then(content => {
-    const remoteLinks = content.map(c => ({
-      path: `/${c.attributes.slug}`,
-      text: c.attributes.title,
-      order: c.attributes.navbarOrder
-    }));
-    const sorted = [...STATIC_LINKS, ...remoteLinks].sort((a, b) => a.order - b.order)
-    return sorted;
-  });
+  return import('../lib/nav')
+    .then(({getNavbarContent}) => getNavbarContent())
+    .then(content => {
+      const remoteLinks = content.map(c => ({
+        path: `/${c.attributes.slug}`,
+        text: c.attributes.title,
+        order: c.attributes.navbarOrder
+      }));
+      const sorted = [...STATIC_LINKS, ...remoteLinks].sort((a, b) => a.order - b.order)
+      return sorted;
+    });
 };
 
 MyApp.getInitialProps = async (appContext) => {
