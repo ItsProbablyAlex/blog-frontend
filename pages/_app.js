@@ -27,6 +27,7 @@ function MyApp({ Component, pageProps, navLinks }) {
       <Head>
         <link rel="preload" href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" as="style" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" />
+        <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
