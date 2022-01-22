@@ -8,4 +8,5 @@ module.exports = withBundleAnalyzer({
     experimental: {
         styledComponents: true,
     },
+    productionBrowserSourceMaps: true,
 });
