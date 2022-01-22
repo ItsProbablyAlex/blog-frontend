@@ -7,5 +7,13 @@ module.exports = withBundleAnalyzer({
     experimental: {
         styledComponents: true,
     },
+    webpack: (config, { isServer, webpack }) => {
+        if (!isServer) {
+            config.plugins.push(new webpack.IgnorePlugin({
+                resourceRegExp: /^(graphql|@apollo\/client)$/,
+            }));
+        }
+        return config;
+    },
     productionBrowserSourceMaps: true,
 });
