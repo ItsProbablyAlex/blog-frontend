@@ -3,10 +3,10 @@ import Link from "../../_atoms/link";
 
 const NavHeader = styled.div``;
 
-const NavTitle = styled.h1`
-  color: ${({theme}) => theme.colors.header};
-  font-size: 2rem;
-  text-decoration: underline;
+const NavTitle = styled(Link)`
+    font-size: 2rem;
+    font-weight: 700;
+    text-decoration: underline;
 `;
 
 const NavSub = styled.h2`
@@ -32,7 +32,7 @@ const buildLink = (p) => (
 export default (props) => (
   <>
     <NavHeader>
-      <NavTitle>Alex Chapman</NavTitle>
+      <NavTitle path="/">Alex Chapman</NavTitle>
       <NavSub>Full Stack Engineer</NavSub>
     </NavHeader>
     <NavOptions>

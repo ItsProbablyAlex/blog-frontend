@@ -5,6 +5,6 @@ export default styled.a`
     font-weight: 400;
     color: ${({theme}) => theme.colors.link};
     :hover{
-    color: ${({theme}) => theme.colors.subHeader};
+        color: ${({theme}) => theme.colors.subHeader};
     }
 `;
