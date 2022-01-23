@@ -10,11 +10,11 @@ const Main = styled.div`
   margin: 0 auto;
 `;
 
-export default ({pageTitle, navLinks, children}) => (
+export default ({pageTitle, navLinks, year, children}) => (
   <Main>
     <Navbar navLinks={navLinks}/>
     <PageTitle pageTitle={pageTitle} /> 
     <main>{children}</main>
-    <Footer />
+    <Footer year={year} />
   </Main>
 )

@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-function MyApp({ Component, pageProps, navLinks }) {
+function MyApp({ Component, pageProps, navLinks, year }) {
   const getLayout = Component.getLayout || ((page) => page);
   return (
     <>
@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps, navLinks }) {
       </Head>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        {getLayout(<Component {...pageProps} navLinks={navLinks} />)}
+        {getLayout(<Component {...pageProps} navLinks={navLinks} year={year} />)}
       </ThemeProvider>
     </>
   );
@@ -64,7 +64,11 @@ MyApp.getInitialProps = async (appContext) => {
     App.getInitialProps(appContext),
     getNavLinks()
   ]).then(values => {
-    return {...values[0], navLinks: values[1]}
+    return {
+      ...values[0],
+      navLinks: values[1],
+      year: new Date().getFullYear()
+    }
   })
 }
 

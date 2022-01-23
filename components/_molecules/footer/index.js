@@ -4,8 +4,8 @@ const Footer = styled.footer`
   text-align: center;
 `;
 
-export default () => (
+export default ({year}) => (
   <Footer>
-    <p>© {new Date().getFullYear()} ProbablyAlex</p>
+    <p>© {year} ProbablyAlex</p>
   </Footer>
 );

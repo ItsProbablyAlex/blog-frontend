@@ -6,7 +6,7 @@ const HomePage = (props) => (
 );
 
 HomePage.getLayout = (page) => (
-  <Layout navLinks={page.props.navLinks}>{page}</Layout>
+  <Layout navLinks={page.props.navLinks} year={page.props.year}>{page}</Layout>
 );
 
 export const getStaticProps = async () => {

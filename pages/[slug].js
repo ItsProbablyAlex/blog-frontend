@@ -7,7 +7,7 @@ const DynamicMDX = dynamic(() => import('../components/_molecules/markdown'));
 const SinglePage = ({content}) => <DynamicMDX content={content} />;
 
 SinglePage.getLayout = (page) => (
-  <Layout pageTitle={page.props.metadata.title} navLinks={page.props.navLinks}>{page}</Layout>
+  <Layout pageTitle={page.props.metadata.title} navLinks={page.props.navLinks} year={page.props.year}>{page}</Layout>
 );
 
 export async function getStaticPaths() {
