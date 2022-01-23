@@ -26,5 +26,14 @@ module.exports = withBundleAnalyzer({
         }
         return config;
     },
+    async redirects() {
+        return [
+          {
+            source: '/',
+            destination: '/about',
+            permanent: true,
+          },
+        ]
+    },
     productionBrowserSourceMaps: true,
 });
