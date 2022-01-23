@@ -4,14 +4,14 @@ import Link from "../../_atoms/link";
 const NavHeader = styled.div``;
 
 const NavTitle = styled(Link)`
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 700;
     text-decoration: underline;
 `;
 
 const NavSub = styled.h2`
   color: ${({theme}) => theme.colors.subHeader};
-  font-size: 1rem;
+  font-size: 1.5rem;
 `;
 
 const NavOptions = styled.nav`
@@ -23,10 +23,16 @@ const NavLinks = styled.ul`
   list-style: none;
 `;
 
+const NavLinkItem = styled.li``;
+
+const NavLink = styled(Link)`
+    font-size: 1.5rem;
+`;
+
 const buildLink = (p) => (
-    <li key={p.text.replace(/\s/,'-')}>
-        <Link path={p.path}>{p.text}</Link>
-    </li>
+    <NavLinkItem key={p.text.replace(/\s/,'-')}>
+        <NavLink path={p.path}>{p.text}</NavLink>
+    </NavLinkItem>
 );
 
 export default (props) => (
