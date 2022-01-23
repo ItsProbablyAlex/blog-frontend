@@ -6,6 +6,6 @@ const Footer = styled.footer`
 
 export default () => (
   <Footer>
-    <p>© Alex Chapman</p>
+    <p>© {new Date().getFullYear()} ProbablyAlex</p>
   </Footer>
 );
