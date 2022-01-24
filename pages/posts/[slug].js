@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import { serialize } from 'next-mdx-remote/serialize';
 import Layout from '../../components/_templates/main';
+import Prism from 'mdx-prism'
 
 const DynamicMDX = dynamic(() => import('../../components/_molecules/markdown'));
 
@@ -25,7 +26,14 @@ export async function getStaticPaths() {
 export const getStaticProps = async (context) => {
   const post = import('../../lib/posts')
     .then(({getPostContent}) => getPostContent(context.params.slug));
-  const parsed = post.then(p => serialize(p.attributes.content));
+  const parsed = post.then(p => serialize(
+    p.attributes.content,
+    {
+      mdxOptions: {
+        rehypePlugins: [Prism],
+      },
+    }
+  ));
   return Promise.all([post, parsed])
     .then(([post, parsed]) => ({
       props: {
