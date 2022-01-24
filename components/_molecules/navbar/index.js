@@ -38,7 +38,7 @@ const buildLink = (p) => (
 export default (props) => (
   <>
     <NavHeader>
-      <NavTitle path="/">Alex Chapman</NavTitle>
+      <NavTitle path="/about">Alex Chapman</NavTitle>
       <NavSub>Full Stack Engineer</NavSub>
     </NavHeader>
     <NavOptions>
