@@ -10,19 +10,37 @@ const PostCard = styled.div`
   }
 `;
 
-const buildPostCard = (p) => (
-  <PostCard key={p.attributes.slug}>
-      <Link path={`/posts/${p.id}`}>
-        {p.attributes.title}
-      </Link>
-      <p>{p.attributes.pretext}</p>
-  </PostCard>
-);
+const buildPost = (p) => {
+  if (p['__typename'] === 'PostEntity') {
+    return (
+      <PostCard key={p.attributes.slug}>
+        <Link path={`/posts/${p.id}`}>
+          {p.attributes.title}
+        </Link>
+        <p>{p.attributes.pretext}</p>
+        <p>{p.attributes.updatedAt}</p>
+     </PostCard>
+    );
+  } else if (p['__typename'] === 'MicroPostEntity') {
+    return (
+      <PostCard>
+        <Link path={`/about`}>
+          Micropost
+        </Link>
+        <p>{p.attributes.content}</p>
+        <p>{p.attributes.updatedAt}</p>
+      </PostCard>
+    );
+  } else {
+    console.log('unknown type: '+ p['__typename'])
+  }
+};
 
 const HomePage = (props) => (
   <>
+  {console.log(props.posts)}
     {
-      props.posts.map(p => buildPostCard(p))
+      props.posts.map(p => buildPost(p))
     }
   </>
 );
