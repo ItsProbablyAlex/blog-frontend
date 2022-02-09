@@ -12,7 +12,7 @@ Post.getLayout = (page) => (
 );
 
 export async function getStaticPaths() {
-  return import('../../lib/posts')
+  return import('../../lib/backend/posts')
     .then(({getPostIds}) => getPostIds()) 
     .then(postIds => {
       const paths = postIds.map(id => `/posts/${id}`)
@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async (context) => {
-  const post = import('../../lib/posts')
+  const post = import('../../lib/backend/posts')
     .then(({getPostContent}) => getPostContent(context.params.slug));
   const parsed = post.then(p => serialize(
     p.attributes.content,

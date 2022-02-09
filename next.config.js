@@ -16,7 +16,7 @@ module.exports = withBundleAnalyzer({
                 new webpack.IgnorePlugin({
                   checkResource(resource, context) {
                     // If I am including something from my backend directory, I am sure that this shouldn't be included in my frontend bundle
-                    if (resource.includes('/lib/') && !context.includes('node_modules')) {
+                    if (resource.includes('/lib/backend') && !context.includes('node_modules')) {
                       return true;
                     }
                     return false;

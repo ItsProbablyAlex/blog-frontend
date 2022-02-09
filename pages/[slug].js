@@ -11,7 +11,7 @@ SinglePage.getLayout = (page) => (
 );
 
 export async function getStaticPaths() {
-  return import('../lib/statics')
+  return import('../lib/backend/statics')
     .then(({getSinglePagePaths}) => getSinglePagePaths())
     .then(singlePagePaths => {
       const paths = singlePagePaths.map(page => `/${page.attributes.slug}`);
@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async (context) => {
-  const page = import('../lib/statics')
+  const page = import('../lib/backend/statics')
     .then(({getContentPage}) => getContentPage(context.params.slug));
   const parsed = page.then(p => serialize(p.attributes.content));
   return Promise.all([page, parsed])

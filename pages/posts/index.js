@@ -50,7 +50,7 @@ HomePage.getLayout = (page) => (
 );
 
 export const getStaticProps = async () => {
-  return import('../../lib/posts')
+  return import('../../lib/backend/posts')
     .then(({getPostOverviews}) => getPostOverviews())
     .then(posts => ({
       props: {
