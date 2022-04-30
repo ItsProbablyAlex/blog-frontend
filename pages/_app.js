@@ -8,8 +8,15 @@ const theme = {
     background: "#e9e7dc",
     header: "#e98074",
     subHeader: '#6e6e6e',
-    link: "#e98074"
+    link: "#e98074",
   },
+  fontSize: {
+    xs: "0.1rem",
+    s: "1.3rem",
+    m: "1.6rem",
+    l: "1.9rem",
+    xl: "2.2rem",
+  }
 };
 
 const GlobalStyle = createGlobalStyle`
