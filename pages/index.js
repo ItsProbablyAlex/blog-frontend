@@ -1,5 +1,5 @@
 import Layout from '../components/_templates/main';
-import { getPostOverviews } from '../lib/posts';
+import { getPostOverviews } from '../../lib/posts';
 
 const HomePage = (props) => (
   <p>{props.posts.map(p => p.attributes.title)}</p>

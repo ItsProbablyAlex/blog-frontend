@@ -31,8 +31,6 @@ const buildPost = (p) => {
         <p>{p.attributes.updatedAt}</p>
       </PostCard>
     );
-  } else {
-    console.log('unknown type: '+ p['__typename'])
   }
 };
 
